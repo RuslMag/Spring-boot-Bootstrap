@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="css/login.css" th:href="@{/css/login.css}">
+</head>
+<body>
+<div class="container-fluid h-100">
+
+    <div class="row justify-content-center align-items-center h-100 ">
+        <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <h3 class="text-center">Регистрация</h3>
+            <form action="/" th:object="${user}" th:action="@{/registration}" method="POST">
+
+                <div class="mb-3">
+                    <label for="username">Введите имя</label>
+                    <input class="form-control" placeholder=""
+                           type="text" th:field="*{username}" id="username" required>
+                    <div class="invalid-feedback d-block" role="alert"
+                         th:if="${#fields.hasErrors('username')}" th:errors="*{username}">error
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="age">Введите возраст</label>
+                    <input class="form-control" placeholder=""
+                           type="number" th:field="*{age}" id="age" required>
+                    <div class="invalid-feedback d-block" role="alert"
+                         th:if="${#fields.hasErrors('age')}" th:errors="*{age}">error
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="city">Введите город</label>
+                    <input class="form-control" placeholder=""
+                           type="text" th:field="*{city}" id="city" required>
+                    <div class="invalid-feedback d-block" role="alert"
+                         th:if="${#fields.hasErrors('city')}" th:errors="*{city}">error
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">Введите Email</label>
+                    <input class="form-control" placeholder=""
+                           type="email" th:field="*{email}" id="email" required>
+                    <div class="invalid-feedback d-block" role="alert"
+                         th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password">Введите пароль</label>
+                    <input class="form-control" placeholder="" type="password"
+                           th:field="*{password}" id="password" required>
+                    <div class="invalid-feedback d-block" role="alert"
+                         th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error
+                    </div>
+                </div>
+                <button class="w-100 btn btn-success btn-lg btn-block">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+            </form>
+            <br>
+            <form action="/">
+                <input class="w-100 btn btn-outline-primary btn-lg btn-block" type="submit" value="На главную"/>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

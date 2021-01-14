@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Юзер</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="css/dashboard.css" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand sticky-top navbar-dark bg-dark" aria-label="Second navbar example">
+    <div class="container-fluid">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item d-inline-flex">
+                <p class="text-white h6 nav-link" th:text="${user.getEmail()} + ' с ролью: '">user</p>
+                <p class="text-white h6 nav-link" th:each="roles : ${user.getRoles()}"
+                   th:text="${roles.name} + ' '">roles</p>
+            </li>
+        </ul>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="/logout">Выход</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav id="nav-sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+            <div class="position-sticky pt-3">
+                <div class="list-group" id="list-tab" role="tablist">
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a  aria-controls="home" class="list-group-item list-group-item-action" href="/admin">
+                        Администратор</a>
+                    </div>
+                    <a aria-controls="profile" class="list-group-item list-group-item-action active" href="/user">
+                        Пользователь</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                <h1 class="h2">Страница Пользователя</h1>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">О пользователе</h5>
+                <div class="my-2 p-3 bg-white rounded">
+                    <div class="border-bottom"></div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Имя</th>
+                                    <th>Возраст</th>
+                                    <th>Город</th>
+                                    <th>Email</th>
+                                    <th>Роль</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><span th:text="${user.getId()}" id="id"> Id </span></td>
+                                    <td><span th:text="${user.getUsername()}" id="name"> Name </span></td>
+                                    <td><span th:text="${user.getAge()}" id="age"> Age </span></td>
+                                    <td><span th:text="${user.getCity()}" id="city"> City </span></td>
+                                    <td><span th:text="${user.getEmail()}" id="Email"> Email </span></td>
+                                    <td><span th:each="roles : ${user.getRoles()}" th:text="${roles.name} + '  '"
+                                              id="Roles"> Roles </span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
